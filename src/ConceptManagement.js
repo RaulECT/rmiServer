@@ -76,6 +76,33 @@ class ConceptManagement {
 
     } )
   }
+
+  deleteConcept( userModifyId, conceptId, callbak ) {
+    let answer = {}
+
+    Concept.findById( conceptId, ( err, concept ) => {
+
+      if( concept.idUser == userModifyId ) {
+        concept.remove( err => {
+          if( err ) {
+            answer.complete = false
+            answer.message = `Error to delete concept`
+          } else {
+            answer.complete = true
+            answer.message = 'Concept has been removed'
+          }
+
+          callbak( answer )
+        } )
+      } else {
+        answer.complete = false
+        answer.message = 'You cant delete this concept'
+
+        callbak( answer )
+      }
+
+    } )
+  }
 }
 
 module.exports = ConceptManagement
