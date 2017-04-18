@@ -31,15 +31,33 @@ const createTopic = {
   name: 'Topic Name'
 }
 
+const createTopic2 = {
+  name: 'Topic Name 2'
+}
+
+const topicModify = {
+  topicName: 'topic new name'
+}
 
 const answer = userSignIn.registerUser( user, ( token ) => {
   //console.log( token )
 } )
 
+
 topicManagement.createTopic( createTopic, ( topic ) => {
   console.log( topic )
 } )
 
+topicManagement.createTopic( createTopic2, ( topic ) => {
+  console.log( topic )
+} )
+
+
+topicManagement.deleteTopic( "58f5678b4fa55a21f824ef2f", ( answer ) => {
+  console.log( answer )
+} )
+
+
 userAuth.verifyUser( verify, ( token ) => {
-  console.log( token )
+  //console.log( token )
 } )
