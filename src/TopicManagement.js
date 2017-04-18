@@ -28,6 +28,27 @@ class TopicManagement {
 
   }
 
+  addConcept( topicId, conceptId, callbak ) {
+    let answer = {}
+
+    Topic.findById( topicId, ( err, topic ) => {
+      if( err ) answer.complete = false
+
+      topic.concepts.push( conceptId )
+
+
+      topic.save( ( err, topicUpdated ) => {
+        if( err ) {
+          answer.complete = false
+        } else {
+          answer.complete = true
+        }
+
+        callbak( answer )
+      } )
+    } )
+  }
+
   getTopics() {
     Topic.find( {}, ( err, topics ) )
   }
