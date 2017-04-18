@@ -31,6 +31,26 @@ class ConceptManagement {
     } )
 
   }
+
+  modifyAvaliability( conceptId, callbak ) {
+    let answer = {}
+
+    Concept.findById( conceptId, ( err, concept ) => {
+      if( err ) {
+        answer.complete = false
+        answer.message = `Error to change concept availability: ${err}`
+        callbak( answer )
+      } else {
+        concept.availability = false
+        concept.save( ( err, conceptUpdated ) => {
+          answer.complete = true
+          answer.message = 'Concept now cant be edited for anyone'
+
+          callbak( answer )
+        } )
+      }
+    } )
+  }
 }
 
 module.exports = ConceptManagement

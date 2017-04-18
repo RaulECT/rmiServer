@@ -68,7 +68,7 @@ topicManagement.createTopic( createTopic2, ( topic ) => {
   console.log( topic )
 } )*/
 
-
+/*
 conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c50f509", concept3, ( answer ) => {
   console.log( answer )
 } )
@@ -79,9 +79,11 @@ conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c
 
 conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c50f509", concept2, ( answer ) => {
   console.log( answer )
+} )*/
+
+conceptManagement.modifyAvaliability( "58f5a4be9cb76c15945af907", ( answer ) => {
+  console.log( answer )
 } )
-
-
 
 userAuth.verifyUser( verify, ( token ) => {
   //console.log( token )
