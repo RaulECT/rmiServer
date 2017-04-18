@@ -32,7 +32,7 @@ class ConceptManagement {
 
   }
 
-  modifyAvaliability( conceptId, callbak ) {
+  modifyAvaliability( conceptId, userModifyId , callbak ) {
     let answer = {}
 
     Concept.findById( conceptId, ( err, concept ) => {
@@ -42,6 +42,7 @@ class ConceptManagement {
         callbak( answer )
       } else {
         concept.availability = false
+        concept.userModify = userModifyId
         concept.save( ( err, conceptUpdated ) => {
           answer.complete = true
           answer.message = 'Concept now cant be edited for anyone'
@@ -49,6 +50,30 @@ class ConceptManagement {
           callbak( answer )
         } )
       }
+    } )
+  }
+
+  modifyConcept( userModifyId, conceptId, conceptData, callbak ) {
+    let answer = {}
+
+    Concept.findById( conceptId, ( err, concept ) => {
+
+      if( !concept.availability ) {
+        if( concept.userModify == userModifyId ) {
+          Concept.findByIdAndUpdate( conceptId, conceptData, ( err, conceptUpdated ) => {
+            answer.complete = true
+            answer.conceptUpdated = conceptUpdated
+
+            callbak( answer )
+          } )
+        } else {
+          answer.complete = false
+          answer.message = 'You can not modify this concept, some one is modify'
+
+          callbak( answer )
+        }
+      }
+
     } )
   }
 }

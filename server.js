@@ -81,8 +81,18 @@ conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c
   console.log( answer )
 } )*/
 
-conceptManagement.modifyAvaliability( "58f5a4be9cb76c15945af907", ( answer ) => {
+let modC = {
+  name: "New namaae",
+  description: "new descripaaation",
+  availability: true
+}
+
+conceptManagement.modifyAvaliability( "58f5a4be9cb76c15945af908", "58f51c75fd3ae63da40ad360", ( answer ) => {
   console.log( answer )
+} )
+
+conceptManagement.modifyConcept( "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af908", modC, ( answer ) => {
+  console.log(answer)
 } )
 
 userAuth.verifyUser( verify, ( token ) => {
