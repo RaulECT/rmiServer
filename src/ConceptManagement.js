@@ -6,6 +6,7 @@ const TopicManagement = require( './TopicManagement' )
 class ConceptManagement {
   constructor() {
     this.topicManagement = new TopicManagement()
+    this.concepts = []
   }
 
   createConcept( userId, topicId, conceptData, callbak ) {
@@ -101,6 +102,43 @@ class ConceptManagement {
         callbak( answer )
       }
 
+    } )
+  }
+
+  getAllConcepts( callbak ) {
+    let answer = {}
+
+    Concept.find( {}, ( err, concepts ) => {
+      if( err ) {
+        answer.complete = false
+      } else {
+        answer.complete = true
+        answer.data = concepts
+      }
+
+      callbak( answer )
+    } )
+  }
+
+  getConceptsFromTopic( idTopic, callbak ) {
+    this.concepts = []
+    this.topicManagement.getTopicConcepts(  idTopic ,( concepts ) => {
+      let allConcepts = []
+      console.log( concepts )
+      concepts.concepts.map( ( idConcept ) => {
+        this.getConcept( idConcept )
+      } )
+
+      console.log( this.concepts )
+      callbak( allConcepts )
+    } )
+  }
+
+  getConcept( idConcept ){
+    Concept.findById( idConcept, ( err, concept ) => {
+      //console.log( concept )
+      this.concepts.push( concept )
+      console.log( this.concepts )
     } )
   }
 }

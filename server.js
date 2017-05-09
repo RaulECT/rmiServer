@@ -96,10 +96,22 @@ conceptManagement.modifyConcept( "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c1594
   console.log(answer)
 } )*/
 
-conceptManagement.deleteConcept( "58f51c75fd3ae63da40ad36", "58f5a4be9cb76c15945af908", ( answer ) => {
+/*conceptManagement.deleteConcept( "58f51c75fd3ae63da40ad36", "58f5a4be9cb76c15945af908", ( answer ) => {
   console.log( answer )
 } )
 
 userAuth.verifyUser( verify, ( token ) => {
   //console.log( token )
+} )
+
+topicManagement.getTopics( ( answer ) => {
+  console.log( answer )
+} )*/
+
+/*topicManagement.getTopicConcepts( "58f5a4750359e83d3c50f509", (answer) => {
+  console.log(answer)
+} )*/
+
+conceptManagement.getConceptsFromTopic( "58f5a4750359e83d3c50f509", ( answer ) => {
+  console.log(answer)
 } )

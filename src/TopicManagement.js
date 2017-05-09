@@ -2,6 +2,7 @@
 
 const Topic = require( './models/Topic' )
 
+
 class TopicManagement {
   constructor() {
 
@@ -28,6 +29,19 @@ class TopicManagement {
 
   }
 
+  getTopicConcepts( idTopic, callbak ) {
+    let answer = {}
+
+    Topic.findById( idTopic, ( err, topic ) => {
+      if ( err ) {
+        answer.complete = false
+      } else {
+        let conceptsId = topic.concepts
+        callbak( topic )
+      }
+    } )
+  }
+
   addConcept( topicId, conceptId, callbak ) {
     let answer = {}
 
@@ -49,8 +63,19 @@ class TopicManagement {
     } )
   }
 
-  getTopics() {
-    Topic.find( {}, ( err, topics ) )
+  getTopics( callbak ) {
+    let answer = {}
+
+    Topic.find( {}, ( err, topics ) => {
+      if ( err ) {
+        answer.complete = false
+      } else {
+        answer.complete = true
+        answer.data = topics
+      }
+
+      callbak( answer )
+    } )
   }
 
   modifyTopic( idTopic, topicData, callbak ) {
