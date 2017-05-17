@@ -25,6 +25,51 @@ class LogManagement {
       } )
     } )
   }
+
+  getAllEntries( callbak ) {
+    let answer = {}
+
+    Log.find( {}, ( err, logs ) => {
+      if ( err ) {
+        answer.complete = false
+      } else {
+        answer.complete = true
+        answer.data = logs
+      }
+
+      callbak( answer )
+    } )
+  }
+
+  getItemEntries( item, callbak ) {
+    let answer = {}
+
+    Log.find( {item}, ( err, logs ) => {
+      if ( err ) {
+        answer.complete = false
+      } else {
+        answer.complete = true
+        answer.data = logs
+      }
+
+      callbak( answer )
+    } )
+  }
+
+  getUserEntries( user, callbak ) {
+    let answer = {}
+
+    Log.find( {user}, ( err, logs ) => {
+      if ( err ) {
+        answer.complete = false
+      } else {
+        answer.complete = true
+        answer.data = logs
+      }
+
+      callbak( answer )
+    } )
+  }
 }
 
 module.exports = LogManagement

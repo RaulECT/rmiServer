@@ -6,6 +6,7 @@ const config = require( './config' )
 const UserAuth = require( './src/UserAuth' )
 const TopicManagement = require( './src/TopicManagement' )
 const ConceptManagement = require( './src/ConceptManagement' )
+const LogManagement = require( './src/LogManagement' )
 
 mongoose.connect( config.db, ( err, res ) => {
   if( err ) console.log( `DB connection error: ${err}` )
@@ -17,6 +18,7 @@ const topicManagement = new TopicManagement()
 const userSignIn = new UserSignIn()
 const userAuth = new UserAuth()
 const conceptManagement = new ConceptManagement()
+const logManagement = new LogManagement()
 
 const user = {
   email : 'email10111@correo.com',
@@ -127,4 +129,16 @@ topicManagement.getTopics( ( answer ) => {
   answer.map( ( concept ) => {
     conceptManagement.getConcept( concept )
   } )
+} )*/
+
+/*logManagement.getAllEntries( ( data ) => {
+  console.log( data )
+} )*/
+
+/*logManagement.getItemEntries( "concept 2", ( data ) => {
+  console.log( data )
+} )*/
+
+/*logManagement.getUserEntries( "email10111@correo.com", ( data ) => {
+  console.log( data )
 } )*/
