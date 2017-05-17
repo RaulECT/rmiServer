@@ -29,7 +29,7 @@ const verify = {
 }
 
 const createTopic = {
-  name: 'Topic Name'
+  name: 'Topic Name 787878'
 }
 
 const createTopic2 = {
@@ -68,8 +68,8 @@ userAuth.verifyUserToken( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEy
 
 
 
-
-/*topicManagement.createTopic( createTopic, ( topic ) => {
+/*
+topicManagement.createTopic( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', createTopic, ( topic ) => {
   console.log( topic )
 } )
 
@@ -97,14 +97,14 @@ let modC = {
   availability: true
 }
 
-
+/*
 conceptManagement.modifyAvaliability( "58f5a4be9cb76c15945af908", "58f51c75fd3ae63da40ad360", ( answer ) => {
   console.log( answer )
 } )
 
 conceptManagement.modifyConcept( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af908", modC, ( answer ) => {
   console.log(answer)
-} )
+} )*/
 
 /*conceptManagement.deleteConcept( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af909", ( answer ) => {
   console.log( answer )

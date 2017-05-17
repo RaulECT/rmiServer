@@ -1,14 +1,15 @@
 'use strict'
 
 const Topic = require( './models/Topic' )
+const LogManagement = require( './LogManagement' )
 
 
 class TopicManagement {
   constructor() {
-
+    this.logManagement = new LogManagement()
   }
 
-  createTopic( topicData, callbak ) {
+  createTopic( token, topicData, callbak ) {
     let answer = {}
 
     let topic = new Topic()
@@ -20,6 +21,7 @@ class TopicManagement {
         answer.complete = false
 
       } else {
+        this.logManagement.registerEntry( token, topicData.name, 'alta' )
         answer.complete = true
         answer.topic = topicStored
       }
@@ -78,7 +80,7 @@ class TopicManagement {
     } )
   }
 
-  modifyTopic( idTopic, topicData, callbak ) {
+  modifyTopic( token, idTopic, topicData, callbak ) {
     let answer = {}
 
     Topic.findByIdAndUpdate( idTopic, topicData, ( err, topicUpdated ) => {
@@ -88,13 +90,15 @@ class TopicManagement {
       } else {
         answer.complete = true
         answer.topicUpdated = topicUpdated
+
+        this.logManagement.registerEntry( token, topicUpdated.name, 'modificacion' )
       }
 
       callbak( answer )
     } )
   }
 
-  deleteTopic( idTopic, callbak ) {
+  deleteTopic( token, idTopic, callbak ) {
     let answer = {}
 
     Topic.findById( idTopic, ( err, topic ) => {
@@ -116,6 +120,7 @@ class TopicManagement {
             } else {
               answer.complete = true
               answer.message = "Topic has been remove"
+              this.logManagement( token, topic.name, 'eliminacion' )
             }
 
             callbak( answer )
