@@ -37,7 +37,7 @@ class TopicManagement {
         answer.complete = false
       } else {
         let conceptsId = topic.concepts
-        callbak( topic )
+        callbak( topic.concepts )
       }
     } )
   }

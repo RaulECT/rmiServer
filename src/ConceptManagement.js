@@ -2,14 +2,16 @@
 
 const Concept = require( './models/Concept' )
 const TopicManagement = require( './TopicManagement' )
+const LogManagement = require( './LogManagement' )
 
 class ConceptManagement {
   constructor() {
     this.topicManagement = new TopicManagement()
+    this.logManagement = new LogManagement()
     this.concepts = []
   }
 
-  createConcept( userId, topicId, conceptData, callbak ) {
+  createConcept( token,userId, topicId, conceptData, callbak ) {
     let answer = {}
 
     let concept = new Concept()
@@ -24,6 +26,7 @@ class ConceptManagement {
       } else {
         answer.complete = true
         answer.concept = conceptStored
+        this.logManagement.registerEntry(token, conceptData.name, 'alta')
 
         this.topicManagement.addConcept( topicId, conceptStored._id, (ans) => {
           callbak( answer )
@@ -54,7 +57,7 @@ class ConceptManagement {
     } )
   }
 
-  modifyConcept( userModifyId, conceptId, conceptData, callbak ) {
+  modifyConcept( token, userModifyId, conceptId, conceptData, callbak ) {
     let answer = {}
 
     Concept.findById( conceptId, ( err, concept ) => {
@@ -65,6 +68,7 @@ class ConceptManagement {
             answer.complete = true
             answer.conceptUpdated = conceptUpdated
 
+            this.logManagement.registerEntry( token, conceptUpdated.name, 'modificacion' )
             callbak( answer )
           } )
         } else {
@@ -78,12 +82,13 @@ class ConceptManagement {
     } )
   }
 
-  deleteConcept( userModifyId, conceptId, callbak ) {
+  deleteConcept( token, userModifyId, conceptId, callbak ) {
     let answer = {}
 
     Concept.findById( conceptId, ( err, concept ) => {
 
       if( concept.idUser == userModifyId ) {
+        this.logManagement.registerEntry( token, concept.name, 'eliminacion' )
         concept.remove( err => {
           if( err ) {
             answer.complete = false
@@ -120,19 +125,6 @@ class ConceptManagement {
     } )
   }
 
-  getConceptsFromTopic( idTopic, callbak ) {
-    this.concepts = []
-    this.topicManagement.getTopicConcepts(  idTopic ,( concepts ) => {
-      let allConcepts = []
-      console.log( concepts )
-      concepts.concepts.map( ( idConcept ) => {
-        this.getConcept( idConcept )
-      } )
-
-      console.log( this.concepts )
-      callbak( allConcepts )
-    } )
-  }
 
   getConcept( idConcept ){
     Concept.findById( idConcept, ( err, concept ) => {

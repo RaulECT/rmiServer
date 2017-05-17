@@ -19,6 +19,11 @@ class TokenManagement {
 
     return token
   }
+
+  getTokenData( token ){
+    let decoded = jwt.decode(token, config.SECRET_TOKEN)
+    return decoded
+  }
 }
 
 module.exports = TokenManagement

@@ -8,14 +8,14 @@ class UserAuth {
     this.tokenManagement = new TokenManagement()
   }
 
-  verifyUser( userData, callbak ) {
+  verifyUserData( userData, callbak ) {
     let userEmail = userData.email
     let userPass = userData.password
 
     let answer = {}
 
     User.find( {email: userEmail, password: userPass}, ( err, user ) => {
-      
+
 
       if( user.length == 0 ) {
         answer.complete = false
@@ -30,6 +30,13 @@ class UserAuth {
       callbak( answer )
     } )
   }
+
+  verifyUserToken( userToken, callbak ){
+    let userData = this.tokenManagement.getTokenData( userToken )
+    callbak( userData )
+  }
+
+
 }
 
 module.exports = UserAuth

@@ -19,7 +19,7 @@ const userAuth = new UserAuth()
 const conceptManagement = new ConceptManagement()
 
 const user = {
-  email : 'email8@correo.com',
+  email : 'email10111@correo.com',
   password: 'haylmao8'
 }
 
@@ -51,13 +51,22 @@ const concept2 = {
 }
 
 const concept3 = {
-  name: 'concept 3',
-  description: 'concept 3 description'
+  name: 'concept 331',
+  description: 'concept 31 description'
 }
 
 const answer = userSignIn.registerUser( user, ( token ) => {
   //console.log( token )
 } )
+
+
+userAuth.verifyUserToken( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', ( ans ) => {
+  console.log( ans.sub )
+} )
+
+
+
+
 
 
 /*topicManagement.createTopic( createTopic, ( topic ) => {
@@ -69,9 +78,10 @@ topicManagement.createTopic( createTopic2, ( topic ) => {
 } )*/
 
 /*
-conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c50f509", concept3, ( answer ) => {
+conceptManagement.createConcept('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c50f509", concept3, ( answer ) => {
   console.log( answer )
 } )
+
 
 conceptManagement.createConcept( "58f51c75fd3ae63da40ad360", "58f5a4750359e83d3c50f509", concept1, ( answer ) => {
   console.log( answer )
@@ -87,16 +97,16 @@ let modC = {
   availability: true
 }
 
-/*
+
 conceptManagement.modifyAvaliability( "58f5a4be9cb76c15945af908", "58f51c75fd3ae63da40ad360", ( answer ) => {
   console.log( answer )
 } )
 
-conceptManagement.modifyConcept( "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af908", modC, ( answer ) => {
+conceptManagement.modifyConcept( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af908", modC, ( answer ) => {
   console.log(answer)
-} )*/
+} )
 
-/*conceptManagement.deleteConcept( "58f51c75fd3ae63da40ad36", "58f5a4be9cb76c15945af908", ( answer ) => {
+/*conceptManagement.deleteConcept( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', "58f51c75fd3ae63da40ad360", "58f5a4be9cb76c15945af909", ( answer ) => {
   console.log( answer )
 } )
 
@@ -112,6 +122,9 @@ topicManagement.getTopics( ( answer ) => {
   console.log(answer)
 } )*/
 
-conceptManagement.getConceptsFromTopic( "58f5a4750359e83d3c50f509", ( answer ) => {
+/*topicManagement.getTopicConcepts( "58f5a4750359e83d3c50f509", ( answer ) => {
   console.log(answer)
-} )
+  answer.map( ( concept ) => {
+    conceptManagement.getConcept( concept )
+  } )
+} )*/
