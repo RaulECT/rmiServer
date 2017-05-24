@@ -120,11 +120,14 @@ class TopicManagement {
             } else {
               answer.complete = true
               answer.message = "Topic has been remove"
-              this.logManagement( token, topic.name, 'eliminacion' )
+              this.logManagement.registerEntry( token, topic.name, 'eliminacion' )
             }
 
             callbak( answer )
           } )
+        } else {
+          answer.complete = false
+          answer.message = `Error to delate topic`
         }
 
       }

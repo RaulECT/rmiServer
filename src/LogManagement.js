@@ -13,7 +13,7 @@ class LogManagement {
     const userData = this.tokenManagement.getTokenData( userToken )
 
     User.findById( userData.sub, ( err, user ) => {
-      //console.log(userData);
+      console.log(userData);
 
       let log = new Log()
       log.movement = movement

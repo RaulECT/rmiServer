@@ -180,6 +180,13 @@ io.on( 'connection', ( socket ) => {
     } )
   } )
 
+  //DELETE TOPIC
+  socket.on( 'deleteTopic', ( req, clientCallback ) => {
+    topicManagement.deleteTopic(req.token, req.topicId, (answer) => {
+      clientCallback(answer)
+    })
+  } )
+
   //CREATE CONCEPT
   socket.on( 'createConcept', ( req, clientCallback ) => {
     conceptManagement.createConcept( req.token, req.userId, req.topicId, req.concept, ( answer ) => {
@@ -230,6 +237,13 @@ io.on( 'connection', ( socket ) => {
     } )
   } )
 
+  //GET ALL CONCEPTS
+  socket.on('getAllConcepts', (req, clientCallback) => {
+    conceptManagement.getAllConcepts( (ans) => {
+      clientCallback(ans)
+    } )
+  })
+
   //GET ALL LOGS
   socket.on( 'getAllEntries', ( req, clientCallback ) => {
     logManagement.getAllEntries( ( ans ) => {
@@ -248,6 +262,13 @@ io.on( 'connection', ( socket ) => {
   socket.on( 'getUserEntries', ( req, clientCallback ) => {
     logManagement.getUserEntries( req.user, (ans) => {
       clientCallback(ans)
+    } )
+  } )
+
+  //MODIFY TOPIC
+  socket.on( 'modifyTopic', ( req, clientCallback ) => {
+    topicManagement.modifyTopic(req.token, req.idTopic, req.topicData, (answer) => {
+      clientCallback(answer)
     } )
   } )
 

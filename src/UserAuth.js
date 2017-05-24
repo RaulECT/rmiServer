@@ -25,6 +25,7 @@ class UserAuth {
 
         answer.complete = true
         answer.token = token
+        answer.id = user[0]._id
       }
 
       callbak( answer )

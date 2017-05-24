@@ -45,14 +45,21 @@ class ConceptManagement {
         answer.message = `Error to change concept availability: ${err}`
         callbak( answer )
       } else {
-        concept.availability = false
-        concept.userModify = userModifyId
-        concept.save( ( err, conceptUpdated ) => {
-          answer.complete = true
-          answer.message = 'Concept now cant be edited for anyone'
+        if (concept.availability) {
+          concept.availability = false
+          concept.userModify = userModifyId
+          concept.save( ( err, conceptUpdated ) => {
+            answer.complete = true
+            answer.message = 'Concept now cant be edited for anyone'
 
-          callbak( answer )
-        } )
+            callbak( answer )
+          } )
+        } else {
+          answer.complete = false
+          answer.message = 'Alguien más esta editando este concepto'
+          callbak(answer)
+        }
+
       }
     } )
   }
@@ -87,6 +94,7 @@ class ConceptManagement {
 
     Concept.findById( conceptId, ( err, concept ) => {
 
+      console.log(conceptId);
       if( concept.idUser == userModifyId ) {
         this.logManagement.registerEntry( token, concept.name, 'eliminacion' )
         concept.remove( err => {

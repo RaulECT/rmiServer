@@ -26,7 +26,7 @@ class UserSignIn {
 
           answer.complete = true
           answer.token = token
-
+          answer.id = userStored._id
       }
 
 
