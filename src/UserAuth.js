@@ -13,9 +13,9 @@ class UserAuth {
     let userPass = userData.password
 
     let answer = {}
+    console.log(userData)
 
-    User.find( {email: userEmail, password: userPass}, ( err, user ) => {
-
+    User.find( {"email": userEmail, "password":userPass}, ( err, user ) => {
 
       if( user.length == 0 ) {
         answer.complete = false

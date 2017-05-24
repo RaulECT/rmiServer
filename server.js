@@ -8,6 +8,8 @@ const TopicManagement = require( './src/TopicManagement' )
 const ConceptManagement = require( './src/ConceptManagement' )
 const LogManagement = require( './src/LogManagement' )
 
+
+
 mongoose.connect( config.db, ( err, res ) => {
   if( err ) console.log( `DB connection error: ${err}` )
 
@@ -20,7 +22,7 @@ const userAuth = new UserAuth()
 const conceptManagement = new ConceptManagement()
 const logManagement = new LogManagement()
 
-const user = {
+/*const user = {
   email : 'email10111@correo.com',
   password: 'haylmao8'
 }
@@ -64,7 +66,7 @@ const answer = userSignIn.registerUser( user, ( token ) => {
 
 userAuth.verifyUserToken( 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OTEyNTdjNjc2MGU5Nzk2ZTVhODQxODciLCJpYXQiOjE0OTQzNzQzNDN9.AJrlLsTQBXmmlcnAPouvY0ZJwCF_kDo3W66z3YC-L5Q', ( ans ) => {
   console.log( ans.sub )
-} )
+} )*/
 
 
 
@@ -142,3 +144,32 @@ topicManagement.getTopics( ( answer ) => {
 /*logManagement.getUserEntries( "email10111@correo.com", ( data ) => {
   console.log( data )
 } )*/
+
+const express = require('express')
+const http = require( 'http' )
+const socket = require( 'socket.io' )
+
+const app = express()
+const server = http.createServer(app)
+
+server.listen( process.env.PORT || 3001, () => {
+  console.log('Running on port 3000')
+} )
+
+const io = socket.listen(server)
+
+io.on( 'connection', ( socket ) => {
+  //REGISTER USER
+  socket.on( 'registerUser', ( newUser, clientCallback ) => {
+    userSignIn.registerUser( newUser, ( token ) => {
+      clientCallback( token )
+    } )
+  } )
+
+  //LOGIN USER
+  socket.on( 'loginUser', ( userData, clientCallback ) => {
+    userAuth.verifyUserData( userData, ( answer ) => {
+      clientCallback( answer )
+    } )
+  } )
+} )
