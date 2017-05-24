@@ -126,11 +126,12 @@ class ConceptManagement {
   }
 
 
-  getConcept( idConcept ){
+  getConcept( idConcept, callbak ){
     Concept.findById( idConcept, ( err, concept ) => {
       //console.log( concept )
       this.concepts.push( concept )
-      console.log( this.concepts )
+      console.log( concept )
+      callbak( concept )
     } )
   }
 }

@@ -179,4 +179,76 @@ io.on( 'connection', ( socket ) => {
       clientCallback( topic )
     } )
   } )
+
+  //CREATE CONCEPT
+  socket.on( 'createConcept', ( req, clientCallback ) => {
+    conceptManagement.createConcept( req.token, req.userId, req.topicId, req.concept, ( answer ) => {
+      clientCallback(answer)
+    } )
+  } )
+
+  //MODIFY AVAILABILITY
+  socket.on( 'modifyAvaliability', ( req, clientCallback ) => {
+    conceptManagement.modifyAvaliability(req.conceptId, req.userId, ( answer ) => {
+      clientCallback( answer )
+    } )
+  } )
+
+  //MODIFY CONCEPT
+  socket.on( 'modifyConcept', ( req, clientCallback ) => {
+    conceptManagement.modifyConcept( req.token, req.userId, req.conceptId, req.conceptData, (answer) => {
+      //console.log(answer);
+      clientCallback( answer )
+    }  )
+  } )
+
+  //DELETE CONCEPT
+  socket.on( 'deleteConcept', ( req, clientCallback ) => {
+    conceptManagement.deleteConcept( req.token, req.userId, req.conceptId, ( answer ) => {
+      clientCallback( answer )
+    } )
+  } )
+
+  //GET TOPICS
+  socket.on( 'getTopics', ( req, clientCallback ) => {
+    topicManagement.getTopics( ( answer ) => {
+      clientCallback( answer )
+    } )
+  } )
+
+  //GET CONCEPTS FROM TOPIC
+  socket.on( 'getConceptsTopic', ( req, clientCallback ) => {
+    topicManagement.getTopicConcepts( req.topicId, ( answer ) => {
+      clientCallback( answer )
+    } )
+  } )
+
+  //GET CONCEPT
+  socket.on( 'getConcept', ( req, clientCallback ) => {
+    conceptManagement.getConcept( req.conceptId, (ans) => {
+      clientCallback(ans)
+    } )
+  } )
+
+  //GET ALL LOGS
+  socket.on( 'getAllEntries', ( req, clientCallback ) => {
+    logManagement.getAllEntries( ( ans ) => {
+      clientCallback(ans)
+    } )
+  } )
+
+  //GET LOGS BY ITEM
+  socket.on( 'getItemEntries', ( req, clientCallback ) => {
+    logManagement.getItemEntries( req.item, (ans) => {
+      clientCallback( ans )
+    } )
+  } )
+
+  //GET LOGS BY USER
+  socket.on( 'getUserEntries', ( req, clientCallback ) => {
+    logManagement.getUserEntries( req.user, (ans) => {
+      clientCallback(ans)
+    } )
+  } )
+
 } )
