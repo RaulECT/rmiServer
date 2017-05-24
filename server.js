@@ -172,4 +172,11 @@ io.on( 'connection', ( socket ) => {
       clientCallback( answer )
     } )
   } )
+
+  //CREATE TOPIC
+  socket.on( 'createTopic', ( requst, clientCallback ) => {
+    topicManagement.createTopic( requst.token, requst.topic, ( topic ) => {
+      clientCallback( topic )
+    } )
+  } )
 } )

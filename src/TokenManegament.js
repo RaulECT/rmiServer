@@ -14,7 +14,7 @@ class TokenManagement {
       sub: data._id,
       iat: moment().unix()
     }
-
+    
     const token = jwt.encode( payload, config.SECRET_TOKEN )
 
     return token

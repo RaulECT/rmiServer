@@ -21,6 +21,7 @@ class UserSignIn {
         answer.message = `Error to register user: ${err}`
 
       } else {
+        console.log(userStored)
           const token = this.tokenManagement.createToken( userStored )
 
           answer.complete = true

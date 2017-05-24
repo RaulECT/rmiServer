@@ -13,15 +13,15 @@ class UserAuth {
     let userPass = userData.password
 
     let answer = {}
-    console.log(userData)
+
 
     User.find( {"email": userEmail, "password":userPass}, ( err, user ) => {
-
+      //console.log(user)
       if( user.length == 0 ) {
         answer.complete = false
         answer.message = `User not found`
       } else {
-        let token = this.tokenManagement.createToken( user )
+        let token = this.tokenManagement.createToken( user[0] )
 
         answer.complete = true
         answer.token = token
